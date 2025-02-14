@@ -1,0 +1,120 @@
+/* Home Component Styles */
+
+/* Container for the home component */
+.home-container {
+    padding: 20px;
+  }
+  
+  /* Featured Articles Section */
+  .featured-articles {
+    margin-bottom: 30px;
+  }
+  
+  .featured-articles h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .article-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 15px;
+  }
+  
+  .article-item {
+    width: 30%;
+    background-color: #4800bb38;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+  }
+  
+  .article-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .article-info {
+    padding: 10px;
+  }
+  
+  .article-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .article-info p {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .article-info small {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  /* Search Bar */
+  .search-bar input {
+    padding: 10px;
+    width: 300px;
+    font-size: 1rem;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .sort-options select {
+    padding: 10px;
+    font-size: 1rem;
+    margin-left: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px;
+  }
+  
+  .pagination button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    background-color: #4800bb99;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  .pagination button:hover {
+    background-color: #0031bb;
+  }
+  .search-sort {
+    display: flex;
+    padding: 20px 15px;
+    padding-top: 0;
+    .search-bar {
+      padding-right: 40px;
+    }
+  }
+  .article-section, .featured-articles {
+    box-shadow: 0px 2px 3px 2px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    background-color: #e0e0ff;
+    transition: transform 0.3s ease-in-out;
+  }
+  

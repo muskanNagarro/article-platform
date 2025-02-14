@@ -1,0 +1,23 @@
+<div class="explore-author-container">
+    <!-- Back Button -->
+    <button class="back-btn" (click)="goBack()">Back To Home</button>
+  
+    <div class="search-bar">
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        placeholder="Search authors by name" 
+        (input)="searchAuthors()">
+    </div>
+  
+    <div class="author-list">
+      <div *ngFor="let author of authors" class="author-card">
+        <img [src]="author.profilePicture" alt="{{ author.name }}" class="author-img">
+        <div class="author-info">
+          <h3>{{ author.name }}</h3>
+          <p>{{ author.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

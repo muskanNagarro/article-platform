@@ -1,0 +1,62 @@
+<div class="home-container">
+    <!-- Featured Articles -->
+    <div class="featured-articles">
+      <h1>Featured Articles</h1>
+      <div class="article-list">
+        <div class="article-item" *ngFor="let article of featuredArticles" (click)="onArticleClick(article)">
+          <img [src]="article.thumbnail" alt="Article Thumbnail" class="article-thumbnail" />
+          <div class="article-info">
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.description }}</p>
+            <small>By {{ article.author }} | {{ article.publishDate }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Article List Section -->
+    <div class="article-section">
+      <h1>All Articles</h1>
+  
+      <div class="search-sort">
+        <!-- Search Bar -->
+        <div class="search-bar">
+          Search : <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
+            placeholder="Search articles by title or author"
+          />
+        </div>
+    
+        <!-- Sorting Options -->
+        <div class="sort-options">
+          Sort By:
+          <select [(ngModel)]="sortOption" (change)="onSort()">
+            <option value="latest">Latest</option>
+            <option value="popular">Most Popular</option>
+            <option value="editor">Editor's Pick</option>
+          </select>
+        </div>
+      </div>
+      <!-- Article List -->
+      <div class="article-list">
+        <div class="article-item" *ngFor="let article of pagedArticles" (click)="onArticleClick(article)">
+          <img [src]="article.thumbnail" alt="Article Thumbnail" class="article-thumbnail" />
+          <div class="article-info">
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.description }}</p>
+            <small>By {{ article.author }} | {{ article.publishDate }}</small>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pagination -->
+      <div class="pagination">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,96 @@
+<div class="article-page-container">
+  <!-- Article Content Section -->
+   <div class="heading">
+    <h1>{{ article.title }}</h1>
+    <button class="back-btn" (click)="goBack()">Back To Home</button>
+  </div>
+  <div class="article-author">
+    <div class="article-content">
+      <p class="author-info">
+        <strong>By:</strong> {{ article.author }} | <strong>Published on:</strong> {{ article.publishDate }}
+      </p>
+      <img [src]="article.thumbnail" alt="Article Thumbnail" class="article-thumbnail" />
+      <div class="article-body">
+        <p>{{ article.description }}</p>
+        <div [innerHTML]="article.content"></div>
+      </div>
+    </div>
+
+    <!-- Author Bio Section -->
+    <div class="author-bio">
+      <h3>About the Author</h3>
+      <div class="author-info">
+        <img [src]="author.photo" alt="Author Photo" class="author-photo" />
+        <div>
+          <h4>{{ author.name }}</h4>
+          <p>{{ author.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Comment Section -->
+  <div class="comment-section">
+    <h3>Comments</h3>
+
+    <!-- Sorting Comments -->
+    <div class="comment-sort">
+      <label for="sortOrder">Sort by: </label>
+      <select id="sortOrder" [(ngModel)]="sortOrder" (change)="sortComments()">
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="mostLiked">Most Liked</option>
+      </select>
+    </div>
+
+    <!-- Comment Form -->
+    <div class="comment-form">
+      <textarea [(ngModel)]="newComment" placeholder="Write a comment..."></textarea>
+      <button (click)="postComment()" [disabled]="!isLoggedIn()">Post Comment</button>
+    </div>
+
+    <!-- Display Comments -->
+    <div class="comments-list">
+      <div *ngFor="let comment of article.comments" class="comment">
+        <p><strong>{{ comment.author }}</strong> - {{ comment.timestamp | date:'short' }}</p>
+        <p>{{ comment.text }}</p>
+
+        <div class="like-reply">
+          <div class="comment-likes">
+            <button (click)="comment.likes = comment.likes + 1">Like ({{ comment.likes }})</button>
+          </div>
+          
+          <!-- Reply Button -->
+          <button (click)="showReplyFormForComment(comment.id)" [disabled]="!isLoggedIn()">Reply</button>
+        </div>
+
+        <div *ngIf="showReplyForm && replyToCommentId === comment.id" class="reply-form">
+          <textarea [(ngModel)]="newReply" placeholder="Write a reply..."></textarea>
+          <button (click)="postReply()" [disabled]="!isLoggedIn()">Post Reply</button>
+        </div>
+
+        <!-- Display Replies -->
+        <div class="replies">
+          <div *ngFor="let reply of comment.replies" class="reply">
+            <p><strong>{{ reply.author }}</strong> - {{ reply.timestamp | date:'short' }}</p>
+            <p>{{ reply.text }}</p>
+            <div class="reply-likes">
+              <button (click)="reply.likes = reply.likes + 1">Like ({{ reply.likes }})</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Articles Section -->
+  <div class="related-articles">
+    <h3>Other Articles by {{ article.author }}</h3>
+    <div class="related-article-list">
+      <div class="related-article" *ngFor="let relatedArticle of relatedArticles">
+        <h4>{{ relatedArticle.title }}</h4>
+        <p>{{ relatedArticle.description }}</p>
+        <a target="_blank" [routerLink]="['/article', relatedArticle.id]">Read more</a>
+      </div>
+    </div>
+  </div>
+</div>
