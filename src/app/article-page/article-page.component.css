@@ -33,11 +33,17 @@
     margin: 15px;
     background-color: #4549a04a;
   }
+  .article-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .related-article, .author-info {
     box-shadow: 0px 2px 3px 2px rgba(0, 0, 0, 0.1);
     padding: 15px;
     margin: 15px;
     background-color: #4549a04a;
+    width: 90%;
   }
   .related-article-list {
     display: flex;
@@ -113,4 +119,22 @@
   .heading {
     display: flex;
     justify-content: space-between;
+  }
+  .article-page-container .article-author img {
+    width: 312px;
+    height: 210px;
+  }
+  .article-page-container .article-author .article-content img {
+    width: 95%;
+    height: 210px;
+  }
+  .no-other {
+    font-style: italic;
+  }
+  .related-article p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
   }

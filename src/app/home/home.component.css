@@ -34,8 +34,8 @@
   }
   
   .article-item img {
-    width: 100%;
-    height: auto;
+    width: 312px;
+    height: 210px;
   }
   
   .article-info {
@@ -50,6 +50,11 @@
   .article-info p {
     font-size: 0.9rem;
     color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
   }
   
   .article-info small {

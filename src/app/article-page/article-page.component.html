@@ -86,6 +86,9 @@
   <div class="related-articles">
     <h3>Other Articles by {{ article.author }}</h3>
     <div class="related-article-list">
+      <div class="no-other" *ngIf="relatedArticles.length ===0">
+        No Other Related Articles
+      </div>
       <div class="related-article" *ngFor="let relatedArticle of relatedArticles">
         <h4>{{ relatedArticle.title }}</h4>
         <p>{{ relatedArticle.description }}</p>
