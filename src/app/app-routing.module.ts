@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ExploreAuthorComponent } from './explore-author/explore-author.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'explore-author', component: ExploreAuthorComponent },
   { path: 'article/:id', component: ArticlePageComponent },
-  { path: 'create-article', component: CreateArticleComponent }
+  { path: 'create-article', component: CreateArticleComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'; // To get the article ID from the URL
+import { CommentSortService } from '../comment-sort.service';
 
 @Component({
   selector: 'app-article-page',
@@ -17,7 +18,7 @@ export class ArticlePageComponent implements OnInit {
   replyToCommentId: string = ''; // To identify which comment is being replied to
   sortOrder: string = 'newest'; // Default sorting order
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private commentSortService: CommentSortService) {}
 
   ngOnInit(): void {
     const articleId = this.route.snapshot.paramMap.get('id') || '';
@@ -25,11 +26,11 @@ export class ArticlePageComponent implements OnInit {
 
     // Find the article by ID
     this.article = articles.find((article: any) => article.id === articleId);
-
     // If article is found, retrieve the author and related articles
     if (this.article) {
       this.author = this.getAuthorByName(this.article.author);
       this.relatedArticles = this.getRelatedArticles(this.article.author);
+      this.sortComments();
     }
   }
 
@@ -76,17 +77,29 @@ export class ArticlePageComponent implements OnInit {
     }
   }
 
+   // Method to sort comments
+   sortComments() {
+    this.commentSortService.sortComments(this.article.comments, this.sortOrder)
+      .then(sorted => {
+        this.article.comments = sorted;
+      })
+      .catch(error => {
+        console.error('Error sorting comments:', error);
+      });
+  }
+
   // Sorting the comments
-  sortComments(): void {
-    if (this.article.comments) {
-      if (this.sortOrder === 'newest') {
-        this.article.comments.sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-      } else if (this.sortOrder === 'oldest') {
-        this.article.comments.sort((a: any, b: any) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
-      } else if (this.sortOrder === 'mostLiked') {
-        this.article.comments.sort((a: any, b: any) => b.likes - a.likes);
-      }
-    }
+  onSortChange(): void {
+    this.sortComments();
+    // if (this.article.comments) {
+    //   if (this.sortOrder === 'newest') {
+    //     this.article.comments.sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    //   } else if (this.sortOrder === 'oldest') {
+    //     this.article.comments.sort((a: any, b: any) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+    //   } else if (this.sortOrder === 'mostLiked') {
+    //     this.article.comments.sort((a: any, b: any) => b.likes - a.likes);
+    //   }
+    // }
   }
 
   // Toggle the reply form visibility

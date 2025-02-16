@@ -1,5 +1,11 @@
 /* Home Component Styles */
-
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+$bg-color: #4800bb38;
+$btn-bg-hover-color: #0031bb;
 /* Container for the home component */
 .home-container {
     padding: 20px;
@@ -25,8 +31,8 @@
   
   .article-item {
     width: 30%;
-    background-color: #4800bb38;
-    border-radius: 4px;
+    background-color: $bg-color;
+    @include border-radius(8px);
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
@@ -106,7 +112,7 @@
   }
   
   .pagination button:hover {
-    background-color: #0031bb;
+    background-color: $btn-bg-hover-color;
   }
   .search-sort {
     display: flex;
